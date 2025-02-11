@@ -37,41 +37,53 @@ bool nao_enforcou() {
     return chutes_errados.size() < 5;
 }
 
+void imprime_erros() {
+    cout << "Chutes errados: ";
+    for(char letra : chutes_errados) {
+        cout << letra << " ";
+    }
+    cout << endl;
+}
+
+void imprime_palavra() {
+    for(char letra : PALAVRA_SECRETA) {
+        if(chutou[letra]) {
+            cout << letra << " ";
+
+        } else {
+            cout << "_ ";
+        }
+    }
+    cout << endl;
+}
+
+void chuta() {
+    cout << "Seu chute: " << endl;
+    char chute;
+    cin >> chute;
+
+    chutou[chute] = true;
+
+    if(letra_existe(chute)) {
+        cout << "Você acertou, seu chute está na palavra." << endl;
+    } else {
+        cout << "Você errou, seu chute não está na palavra." << endl;
+        chutes_errados.push_back(chute); //adiciona ao final do vetor o chute dado
+    }
+    cout << endl;
+}
+
 int main() {
     setlocale(LC_ALL, "Portuguese");
 
     imprime_abertura();
 
     while(nao_acertou() && nao_enforcou()) {
-        cout << "Chutes errados: ";
-        for(char letra : chutes_errados) {
-            cout << letra << " ";
-        }
-        cout << endl;
+        imprime_erros();
 
-        for(char letra : PALAVRA_SECRETA) {
-            if(chutou[letra]) {
-                cout << letra << " ";
+        imprime_palavra();
 
-            } else {
-                cout << "_ ";
-            }
-        }
-        cout << endl;
-
-        cout << "Seu chute: " << endl;
-        char chute;
-        cin >> chute;
-
-        chutou[chute] = true;
-
-        if(letra_existe(chute)) {
-            cout << "Você acertou, seu chute está na palavra." << endl;
-        } else {
-            cout << "Você errou, seu chute não está na palavra." << endl;
-            chutes_errados.push_back(chute); //adiciona ao final do vetor o chute dado
-        }
-        cout << endl;
+        chuta();
     }
 
     cout << "Fim de jogo!" << endl;
