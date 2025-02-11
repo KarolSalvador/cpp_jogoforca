@@ -17,7 +17,18 @@ bool letra_existe(char chute) {
     return false;
 }
 
+bool nao_acertou() {
+    for(char letra : PALAVRA_SECRETA) {
+        if(!chutou[letra]) {
+            return true;
+        }        
+    }
+    return false;
+}
 
+bool nao_enforcou() {
+    return chutes_errados.size() < 5;
+}
 
 int main() {
     setlocale(LC_ALL, "Portuguese");
@@ -27,10 +38,7 @@ int main() {
     cout << "***************************************" << endl;
     cout << endl;
 
-    bool nao_acertou = true;
-    bool nao_enforcou = true;
-
-    while(nao_acertou && nao_enforcou) {
+    while(nao_acertou() && nao_enforcou()) {
         cout << "Chutes errados: ";
         for(char letra : chutes_errados) {
             cout << letra << " ";
