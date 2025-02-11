@@ -8,6 +8,13 @@ const string PALAVRA_SECRETA = "MELANCIA";
 map<char, bool> chutou;
 vector<char> chutes_errados;
 
+void imprime_abertura() {
+    cout << "***************************************" << endl;
+    cout << "*           JOGO DA FORCA             *" << endl;
+    cout << "***************************************" << endl;
+    cout << endl;
+}
+
 bool letra_existe(char chute) {
     for(char letra : PALAVRA_SECRETA) {
         if(chute == letra) {
@@ -33,10 +40,7 @@ bool nao_enforcou() {
 int main() {
     setlocale(LC_ALL, "Portuguese");
 
-    cout << "***************************************" << endl;
-    cout << "*           JOGO DA FORCA             *" << endl;
-    cout << "***************************************" << endl;
-    cout << endl;
+    imprime_abertura();
 
     while(nao_acertou() && nao_enforcou()) {
         cout << "Chutes errados: ";
@@ -69,5 +73,15 @@ int main() {
         }
         cout << endl;
     }
+
+    cout << "Fim de jogo!" << endl;
+    
+    if(nao_acertou()) {
+        cout << "Você perdeu! Tente novamente!" << endl;
+    } else {
+        cout << "Parabéns! Você ganhou." << endl;
+    }
+    cout << "A palavra secreta era: " << PALAVRA_SECRETA << endl;
+    cout << endl;
 
 }
