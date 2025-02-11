@@ -2,6 +2,7 @@
 #include <string> //biblioteca para suportar strings
 #include <map> // inclui biblioteca do map
 #include <vector> // inclui biblioteca de vetores
+#include <fstream>
 using namespace std;
 
 const string PALAVRA_SECRETA = "MELANCIA";
@@ -73,10 +74,32 @@ void chuta() {
     cout << endl;
 }
 
+vector<string> ler_arquivo() {
+    ifstream arquivo;
+    arquivo.open("../palavras.txt"); //abre o arquivo palavras.txt
+
+    int quantidade_palavras;
+    arquivo >> quantidade_palavras; //coloca o primeiro item do arquivo na variável criada
+
+    vector<string> palavras_do_arquivo;
+
+    //laço de repetição para ler cada item do arquivo
+    for(int i = 0; i < quantidade_palavras; i++) {
+        string palavra_lida;
+        arquivo >> palavra_lida;
+        palavras_do_arquivo.push_back(palavra_lida);
+
+    }
+    return palavras_do_arquivo;
+
+}
+
 int main() {
     setlocale(LC_ALL, "Portuguese");
 
     imprime_abertura();
+
+    ler_arquivo();
 
     while(nao_acertou() && nao_enforcou()) {
         imprime_erros();
