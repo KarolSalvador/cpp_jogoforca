@@ -80,20 +80,29 @@ void chuta() {
 vector<string> ler_arquivo() {
     ifstream arquivo;
     arquivo.open("../palavras.txt"); //abre o arquivo palavras.txt
+    if(arquivo.is_open()) {
 
-    int quantidade_palavras;
-    arquivo >> quantidade_palavras; //coloca o primeiro item do arquivo na variável criada
-
-    vector<string> palavras_do_arquivo;
-
-    //laço de repetição para ler cada item do arquivo
-    for(int i = 0; i < quantidade_palavras; i++) {
-        string palavra_lida;
-        arquivo >> palavra_lida;
-        palavras_do_arquivo.push_back(palavra_lida);
-
+        int quantidade_palavras;
+        arquivo >> quantidade_palavras; //coloca o primeiro item do arquivo na variável criada
+    
+        vector<string> palavras_do_arquivo;
+    
+        //laço de repetição para ler cada item do arquivo
+        for(int i = 0; i < quantidade_palavras; i++) {
+            string palavra_lida;
+            arquivo >> palavra_lida;
+            palavras_do_arquivo.push_back(palavra_lida);
+    
+        }
+    
+        arquivo.close();
+        return palavras_do_arquivo;
+        
+    } else {
+        cout << "Não foi possível acessar o banco de palavras." << endl;
+        exit(0);
     }
-    return palavras_do_arquivo;
+
 
 }
 
