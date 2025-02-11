@@ -3,9 +3,12 @@
 #include <map> // inclui biblioteca do map
 #include <vector> // inclui biblioteca de vetores
 #include <fstream>
+#include<ctime>
+#include <cstdlib>
+
 using namespace std;
 
-const string PALAVRA_SECRETA = "MELANCIA";
+string palavra_secreta = "MELANCIA";
 map<char, bool> chutou;
 vector<char> chutes_errados;
 
@@ -17,7 +20,7 @@ void imprime_abertura() {
 }
 
 bool letra_existe(char chute) {
-    for(char letra : PALAVRA_SECRETA) {
+    for(char letra : palavra_secreta) {
         if(chute == letra) {
             return true;
         }
@@ -26,7 +29,7 @@ bool letra_existe(char chute) {
 }
 
 bool nao_acertou() {
-    for(char letra : PALAVRA_SECRETA) {
+    for(char letra : palavra_secreta) {
         if(!chutou[letra]) {
             return true;
         }        
@@ -47,7 +50,7 @@ void imprime_erros() {
 }
 
 void imprime_palavra() {
-    for(char letra : PALAVRA_SECRETA) {
+    for(char letra : palavra_secreta) {
         if(chutou[letra]) {
             cout << letra << " ";
 
@@ -94,12 +97,24 @@ vector<string> ler_arquivo() {
 
 }
 
+void sorteia_palavra() {
+    vector<string> palavras = ler_arquivo(); //pega a lista de palavras do arquivo que consta na função
+
+    srand(time(NULL));
+    int indice_sorteado = rand() % palavras.size();
+
+    palavra_secreta = palavras[indice_sorteado];
+
+}
+
 int main() {
     setlocale(LC_ALL, "Portuguese");
 
     imprime_abertura();
 
     ler_arquivo();
+
+    sorteia_palavra();
 
     while(nao_acertou() && nao_enforcou()) {
         imprime_erros();
@@ -116,7 +131,7 @@ int main() {
     } else {
         cout << "Parabéns! Você ganhou." << endl;
     }
-    cout << "A palavra secreta era: " << PALAVRA_SECRETA << endl;
+    cout << "A palavra secreta era: " << palavra_secreta << endl;
     cout << endl;
 
 }
