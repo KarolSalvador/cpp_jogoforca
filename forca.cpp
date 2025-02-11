@@ -20,6 +20,11 @@ bool letra_existe(char chute) {
 int main() {
     setlocale(LC_ALL, "Portuguese");
 
+    cout << "***************************************" << endl;
+    cout << "*           JOGO DA FORCA             *" << endl;
+    cout << "***************************************" << endl;
+    cout << endl;
+
     bool nao_acertou = true;
     bool nao_enforcou = true;
 
@@ -34,6 +39,7 @@ int main() {
         }
         cout << endl;
 
+        cout << "Seu chute: " << endl;
         char chute;
         cin >> chute;
 
